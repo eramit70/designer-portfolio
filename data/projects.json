@@ -1,0 +1,162 @@
+[
+  {
+    "slug": "the-quiet-residence",
+    "title": "The quiet residence",
+    "category": "Residential",
+    "room": "Living room",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/living-concept.webp",
+    "images": [
+      {
+        "src": "assets/images/living-concept.webp",
+        "alt": "AI-generated concept render of an ivory living room with warm oak finishes; not a real client project"
+      }
+    ],
+    "comparison": null
+  },
+  {
+    "slug": "an-oak-ivory-kitchen",
+    "title": "An oak & ivory kitchen",
+    "category": "Kitchen",
+    "room": "Kitchen",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/kitchen.svg",
+    "images": [
+      {
+        "src": "assets/images/kitchen.svg",
+        "alt": "An oak & ivory kitchen \u2014 illustrative concept, not a completed project"
+      }
+    ],
+    "comparison": null
+  },
+  {
+    "slug": "a-softer-kind-of-retreat",
+    "title": "A softer kind of retreat",
+    "category": "Residential",
+    "room": "Bedroom",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/bedroom.svg",
+    "images": [
+      {
+        "src": "assets/images/bedroom.svg",
+        "alt": "A softer kind of retreat \u2014 illustrative concept, not a completed project"
+      }
+    ],
+    "comparison": null
+  },
+  {
+    "slug": "light-through-the-courtyard",
+    "title": "Light through the courtyard",
+    "category": "Architecture",
+    "room": "Living room",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/living.svg",
+    "images": [
+      {
+        "src": "assets/images/living.svg",
+        "alt": "Light through the courtyard \u2014 illustrative concept, not a completed project"
+      }
+    ],
+    "comparison": null
+  },
+  {
+    "slug": "the-gathering-space",
+    "title": "The gathering space",
+    "category": "Residential",
+    "room": "Dining room",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/kitchen.svg",
+    "images": [
+      {
+        "src": "assets/images/kitchen.svg",
+        "alt": "The gathering space \u2014 illustrative concept, not a completed project"
+      }
+    ],
+    "comparison": null
+  },
+  {
+    "slug": "room-to-unwind",
+    "title": "Room to unwind",
+    "category": "Residential",
+    "room": "Bedroom",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/bedroom.svg",
+    "images": [
+      {
+        "src": "assets/images/bedroom.svg",
+        "alt": "Room to unwind \u2014 illustrative concept, not a completed project"
+      }
+    ],
+    "comparison": null
+  },
+  {
+    "slug": "a-considered-workspace",
+    "title": "A considered workspace",
+    "category": "Commercial",
+    "room": "Study room",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/living.svg",
+    "images": [
+      {
+        "src": "assets/images/living.svg",
+        "alt": "A considered workspace \u2014 illustrative concept, not a completed project"
+      }
+    ],
+    "comparison": null
+  },
+  {
+    "slug": "everyday-rituals",
+    "title": "Everyday rituals",
+    "category": "Bathroom",
+    "room": "Bathroom",
+    "location": "Concept study \u00b7 location not assigned",
+    "area": null,
+    "year": null,
+    "demo": true,
+    "description": "An illustrative design study exploring natural materials, a restrained palette and spaces that support everyday life. This is sample content, not a completed client project.",
+    "scope": ["Space planning", "Material palette", "Lighting concept"],
+    "cover": "assets/images/bedroom.svg",
+    "images": [
+      {
+        "src": "assets/images/bedroom.svg",
+        "alt": "Everyday rituals \u2014 illustrative concept, not a completed project"
+      }
+    ],
+    "comparison": null
+  }
+]
