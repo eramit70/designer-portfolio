@@ -1,0 +1,32 @@
+{
+  "name": "FORME",
+  "descriptor": "INTERIORS & ARCHITECTURE",
+  "placeholder": true,
+  "tagline": "Thoughtful spaces. Beautiful living.",
+  "description": "An independent design studio concept, bringing architecture and interiors into quiet harmony.",
+  "phone": "",
+  "whatsapp": "",
+  "email": "",
+  "address": "",
+  "hours": "",
+  "locations": [],
+  "socials": [],
+  "stats": [],
+  "team": [],
+  "achievements": [],
+  "timeSlots": ["10:00", "11:30", "14:00", "15:30", "17:00"],
+  "hero": [
+    {
+      "image": "assets/images/living-concept.webp",
+      "alt": "AI-generated concept render of an ivory living room with warm oak finishes; not a real client project",
+      "title": "Spaces that feel\nlike you.",
+      "label": "A considered approach to living"
+    },
+    {
+      "image": "assets/images/kitchen.svg",
+      "alt": "Illustrated warm oak kitchen concept",
+      "title": "Every detail.\nA little more you.",
+      "label": "Designed around your everyday"
+    }
+  ]
+}

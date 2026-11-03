@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "title": "Architecture",
+    "description": "From first sketch to a considered architectural plan.",
+    "image": "assets/images/living.svg",
+    "items": [
+      "Floor planning",
+      "Elevation and facade design",
+      "Space planning",
+      "Renovation planning"
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Residential Interior Design",
+    "description": "Personal spaces, shaped around the way you live.",
+    "image": "assets/images/bedroom.svg",
+    "items": [
+      "Living room",
+      "Bedroom",
+      "Kids room",
+      "Drawing room",
+      "Dining room",
+      "Pooja room",
+      "Study room"
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Kitchen Design",
+    "description": "Beautifully practical kitchens, with a place for everything.",
+    "image": "assets/images/kitchen.svg",
+    "items": [
+      "Modular kitchen",
+      "L-shaped kitchen",
+      "U-shaped kitchen",
+      "Parallel kitchen",
+      "Island kitchen"
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Bathroom Design",
+    "description": "A calm daily ritual through materials and thoughtful planning.",
+    "image": "assets/images/living.svg",
+    "items": [
+      "Bathroom interiors",
+      "Vanity design",
+      "Shower planning",
+      "Tiles and fixtures"
+    ]
+  },
+  {
+    "id": "5",
+    "title": "Electrical and Lighting",
+    "description": "Light and infrastructure planned together from the start.",
+    "image": "assets/images/bedroom.svg",
+    "items": [
+      "Electrical layout",
+      "Decorative lighting",
+      "Switchboard planning",
+      "Smart lighting"
+    ]
+  },
+  {
+    "id": "6",
+    "title": "Plumbing",
+    "description": "Carefully coordinated water supply and drainage concepts.",
+    "image": "assets/images/kitchen.svg",
+    "items": [
+      "Bathroom plumbing",
+      "Kitchen plumbing",
+      "Water supply and drainage planning"
+    ]
+  },
+  {
+    "id": "7",
+    "title": "False Ceiling",
+    "description": "Depth, proportion and a softer quality of light.",
+    "image": "assets/images/living.svg",
+    "items": [
+      "Gypsum ceiling",
+      "POP ceiling",
+      "Cove lighting",
+      "Decorative ceiling"
+    ]
+  },
+  {
+    "id": "8",
+    "title": "Other",
+    "description": "The finishing details that bring a space together.",
+    "image": "assets/images/bedroom.svg",
+    "items": [
+      "Furniture design",
+      "Wardrobes",
+      "Wall panelling",
+      "Flooring",
+      "Commercial interiors"
+    ]
+  }
+]
