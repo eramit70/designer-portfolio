@@ -31,3 +31,9 @@ An array of `{verified, quote, name}`. Publish only verified permission-backed t
 ## Image provenance
 
 `living-concept.webp` was generated for this demonstration using OpenAI image generation and is explicitly labelled a concept render. The living, kitchen and bedroom SVG files are original simple illustrations created for the project. They are not photographs of client work. No images were taken from either reference website.
+
+## Multi-studio configuration and local editor
+
+`data/config.json` is now the public entry point mapping each published studio URL to independent `site`, `services`, `projects` and `testimonials` files. Existing default file paths are preserved. The optional logo/monogram and `pages`, `home`, `about`, `process`, `principles`, `cta` and `footerDescription` fields in site content manage primary text and imagery previously held in the presentation templates. Stable interface labels and some template helper copy remain part of the HTML/JavaScript design.
+
+The local `admin/` workspace edits these fields, adds studios, previews drafts and exports JSON/ZIP updates. It has no password login or remote persistence. `admin.contactEmail` in central configuration is public owner contact metadata. Full instructions, routing rules and export/deployment limitations are in [admin guide](admin-guide.md).

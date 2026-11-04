@@ -28,5 +28,91 @@
       "title": "Every detail.\nA little more you.",
       "label": "Designed around your everyday"
     }
-  ]
+  ],
+  "logo": "",
+  "monogram": "f.",
+  "pages": {
+    "about": {
+      "title": "Spaces with purpose.\nDesign with soul.",
+      "description": "Discover our studio philosophy and design approach."
+    },
+    "services": {
+      "title": "A complete view.\nA considered detail.",
+      "description": "Explore architecture, interior design and detailed planning."
+    },
+    "portfolio": {
+      "title": "Different spaces.\nOne thoughtful approach.",
+      "description": "Explore our design studies by project, category and room."
+    },
+    "before-after": {
+      "title": "New life.\nSame space.",
+      "description": "Verified transformations from the same space."
+    },
+    "appointment": {
+      "title": "Your space.\nOur next conversation.",
+      "description": "Prepare a consultation enquiry for manual confirmation."
+    },
+    "contact": {
+      "title": "Let\u2019s make room\nfor your ideas.",
+      "description": "Contact the studio to discuss your next space."
+    }
+  },
+  "home": {
+    "heroDescription": "Architecture and interiors in quiet harmony. Considered for your everyday. Crafted for your life.",
+    "introEyebrow": "The art of feeling at home",
+    "introTitle": "Not just a space.\nYour way of living.",
+    "introText": "A quiet corner for slow mornings. A kitchen that brings everyone together. A home that feels unmistakably yours.",
+    "introSecondary": "Our approach brings natural materials, purposeful planning and a love of detail into balance.",
+    "image": "assets/images/bedroom.svg",
+    "imageAlt": "Original bedroom illustration with warm neutral materials"
+  },
+  "about": {
+    "title": "Quietly distinctive.\nDeeply personal.",
+    "description": "We explore the meeting point of architecture, materials and the people who inhabit a space. Practical planning and a coherent visual language belong together.",
+    "image": "assets/images/living.svg",
+    "imageAlt": "Illustrative living room concept",
+    "missionTitle": "Make everyday spaces matter.",
+    "missionText": "Bring care, clarity and a considered design approach to each brief.",
+    "visionTitle": "Beautiful living, naturally.",
+    "visionText": "Spaces that remain meaningful beyond a passing trend."
+  },
+  "process": [
+    {
+      "title": "Discover",
+      "description": "We listen to your routines, aspirations and the space you call home."
+    },
+    {
+      "title": "Imagine",
+      "description": "Layouts, materials and ideas come together in a clear design direction."
+    },
+    {
+      "title": "Refine",
+      "description": "We work through the details and agree the scope with you."
+    },
+    {
+      "title": "Bring to life",
+      "description": "A considered execution plan turns a shared vision into a space to live in."
+    }
+  ],
+  "principles": [
+    {
+      "title": "Made around you",
+      "description": "Your routines and aspirations lead every design decision."
+    },
+    {
+      "title": "Clarity at every step",
+      "description": "A shared brief, considered choices and a defined scope."
+    },
+    {
+      "title": "Materials with meaning",
+      "description": "Texture, proportion and natural light, working together."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Good design starts with a conversation",
+    "title": "A space you love.\nA life you love coming home to.",
+    "description": "Tell us what you have in mind. We\u2019ll take it from there.",
+    "buttonLabel": "Begin your design journey"
+  },
+  "footerDescription": "Thoughtfully designed. Beautifully lived in. A portfolio concept for spaces with purpose."
 }

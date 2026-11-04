@@ -1,3 +1,4 @@
+import { loadPublicContent, contentAsset } from "./content-store.js";
 import { initializeMotion, animateHeading } from "./motion.js";
 const $ = (s, root = document) => root.querySelector(s);
 const $$ = (s, root = document) => [...root.querySelectorAll(s)];
@@ -11,7 +12,7 @@ const esc = (value) =>
   );
 const asset = (value) =>
   /^(assets\/[\w./-]+)$/.test(value || "") && !value.includes("..")
-    ? value
+    ? contentAsset(value)
     : "assets/images/living.svg";
 const https = (value) => {
   try {
@@ -27,14 +28,14 @@ const link = (href, label, cls = "button") =>
   `<a class="${cls}" href="${esc(href)}">${label}<svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></svg></a>`;
 const heading = (kicker, title, text = "") =>
   `<div class="container"><div class="page-heading"><p class="eyebrow">${esc(kicker)}</p><h1>${esc(title)}</h1>${text ? `<p class="intro muted">${esc(text)}</p>` : ""}</div></div>`;
-const note =
+let note =
   '<p class="notice">Demonstration portfolio. Studio identity and design studies are placeholders, not completed client work.</p>';
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 let site, services, projects, testimonials;
 const page = document.body.dataset.page;
 const main = $("#main");
 function brand() {
-  return `<a class="brand" href="index.html" aria-label="${esc(site.name)} home"><span class="brand-mark" aria-hidden="true">f.</span><span class="brand-name">${esc(site.name)}<small>${esc(site.descriptor)}</small></span></a>`;
+  return `<a class="brand" href="index.html" aria-label="${esc(site.name)} home">${site.logo ? `<img class="brand-logo" src="${esc(asset(site.logo))}" alt="">` : `<span class="brand-mark" aria-hidden="true">${esc(site.monogram || "f.")}</span>`}<span class="brand-name">${esc(site.name)}<small>${esc(site.descriptor)}</small></span></a>`;
 }
 function shell() {
   const nav = [
@@ -84,7 +85,7 @@ function shell() {
     { passive: true },
   );
   $("#footer").innerHTML =
-    `<div class="container footer-main"><div>${brand()}<p class="muted" style="margin-top:1.5rem">Thoughtfully designed. Beautifully lived in.<br>A portfolio concept for spaces with purpose.</p></div><div><p class="eyebrow">Explore</p><a href="about.html">Our studio</a><a href="services.html">Our expertise</a><a href="portfolio.html">Design studies</a><a href="before-after.html">Before & after</a></div><div><p class="eyebrow">Start something</p><a href="appointment.html">Book a consultation</a><a href="contact.html">Get in touch</a><p class="muted">${esc(site.email || "Studio contact details coming soon.")}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} ${esc(site.name)} · Studio concept</span><span>Architecture & interiors, thoughtfully together.</span></div>`;
+    `<div class="container footer-main"><div>${brand()}<p class="muted" style="margin-top:1.5rem">${esc(site.footerDescription || site.description)}</p></div><div><p class="eyebrow">Explore</p><a href="about.html">Our studio</a><a href="services.html">Our expertise</a><a href="portfolio.html">Design studies</a><a href="before-after.html">Before & after</a></div><div><p class="eyebrow">Start something</p><a href="appointment.html">Book a consultation</a><a href="contact.html">Get in touch</a><p class="muted">${esc(site.email || "Studio contact details coming soon.")}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} ${esc(site.name)}${site.placeholder ? " · Studio concept" : ""}</span><span>Architecture & interiors, thoughtfully together.</span></div>`;
   document.body.insertAdjacentHTML(
     "beforeend",
     link(
@@ -100,31 +101,12 @@ function card(p) {
   return `<a class="card" href="project.html?slug=${encodeURIComponent(p.slug)}"><div class="card-image">${image(p.cover, p.images?.[0]?.alt || p.title)}${p.demo ? '<span class="pill">CONCEPT STUDY</span>' : ""}</div><h3>${esc(p.title)}</h3><div class="card-meta"><span>${esc(p.category)} / ${esc(p.room)}</span><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></svg></div></a>`;
 }
 function cta() {
-  return `<section class="cta dark"><p class="eyebrow">Good design starts with a conversation</p><h2>A space you love.<br>A life you love coming home to.</h2><p class="muted">Tell us what you have in mind. We’ll take it from there.</p>${link("appointment.html", "Begin your design journey", "button light")}</section>`;
+  return `<section class="cta dark"><p class="eyebrow">${esc(site.cta?.eyebrow || "Let’s talk")}</p><h2>${esc(site.cta?.title || "Your next space starts here.")}</h2><p class="muted">${esc(site.cta?.description || site.description)}</p>${link("appointment.html", esc(site.cta?.buttonLabel || "Book consultation"), "button light")}</section>`;
 }
 const process = () =>
-  `<div class="steps">${[
-    [
-      "Discover",
-      "We listen to your routines, aspirations and the space you call home.",
-    ],
-    [
-      "Imagine",
-      "Layouts, materials and ideas come together in a clear design direction.",
-    ],
-    ["Refine", "We work through the details and agree the scope with you."],
-    [
-      "Bring to life",
-      "A considered execution plan turns a shared vision into a space to live in.",
-    ],
-  ]
-    .map(
-      ([t, d], i) =>
-        `<div class="step reveal"><span class="number">0${i + 1}</span><h3>${t}</h3><p>${d}</p></div>`,
-    )
-    .join("")}</div>`;
+  `<div class="steps">${(site.process || []).map((item, i) => `<div class="step reveal"><span class="number">0${i + 1}</span><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>`).join("")}</div>`;
 function home() {
-  main.innerHTML = `<section class="hero" aria-label="Featured design concepts" aria-roledescription="carousel"><div class="hero-slides">${site.hero.map((s, i) => `<div class="hero-slide ${i === 0 ? "active" : ""}" aria-hidden="${i !== 0}">${image(s.image, s.alt, i === 0)}</div>`).join("")}</div><div class="hero-shade"></div><span class="hero-tag">ILLUSTRATIVE CONCEPT · NOT CLIENT WORK</span><div class="container"><p class="eyebrow" id="hero-label"></p><h1 id="hero-title"></h1><p>Architecture and interiors in quiet harmony.<br>Considered for your everyday. Crafted for your life.</p><div class="hero-actions">${link("portfolio.html", "Explore our spaces", "button light")}${link("appointment.html", "Let’s create something", "text-link")}</div></div><div class="hero-bottom"><span>SCROLL TO DISCOVER ↓</span><div class="slider-controls"><span id="slide-count"></span><button class="icon-button" id="hero-prev" aria-label="Previous hero slide">←</button><button class="icon-button" id="hero-next" aria-label="Next hero slide">→</button><button class="icon-button" id="hero-pause" aria-label="Pause slideshow">Ⅱ</button></div></div></section><div class="ribbon"><span>Architecture</span><span aria-hidden="true">✦</span><span>Interiors</span><span aria-hidden="true">✦</span><span>Thoughtful details</span><span aria-hidden="true">✦</span><span>Timeless living</span></div><section class="container section split"><div class="reveal"><p class="eyebrow">The art of feeling at home</p><h2>Not just a space.<br>Your way of living.</h2><p class="muted intro">A quiet corner for slow mornings. A kitchen that brings everyone together. A home that feels unmistakably yours.</p><p class="muted">Our approach brings natural materials, purposeful planning and a love of detail into balance.</p>${link("about.html", "Discover our philosophy", "text-link")}</div><div><div class="editorial-image">${image("assets/images/bedroom.svg", "Original bedroom illustration with warm neutral materials")}</div><p class="image-note">Material & mood study · illustrative concept</p></div></section><section class="surface section"><div class="container"><div class="section-top"><div><p class="eyebrow">What we do</p><h2>One vision.<br>Every considered detail.</h2></div>${link("services.html", "Explore our expertise", "text-link")}</div><div class="grid">${services
+  main.innerHTML = `<section class="hero" aria-label="Featured design concepts" aria-roledescription="carousel"><div class="hero-slides">${site.hero.map((s, i) => `<div class="hero-slide ${i === 0 ? "active" : ""}" aria-hidden="${i !== 0}">${image(s.image, s.alt, i === 0)}</div>`).join("")}</div><div class="hero-shade"></div><span class="hero-tag">${site.placeholder ? "ILLUSTRATIVE CONCEPT · NOT CLIENT WORK" : esc(site.descriptor)}</span><div class="container"><p class="eyebrow" id="hero-label"></p><h1 id="hero-title"></h1><p>${esc(site.home?.heroDescription || site.description)}</p><div class="hero-actions">${link("portfolio.html", "Explore our spaces", "button light")}${link("appointment.html", "Let’s create something", "text-link")}</div></div><div class="hero-bottom"><span>SCROLL TO DISCOVER ↓</span><div class="slider-controls"><span id="slide-count"></span><button class="icon-button" id="hero-prev" aria-label="Previous hero slide">←</button><button class="icon-button" id="hero-next" aria-label="Next hero slide">→</button><button class="icon-button" id="hero-pause" aria-label="Pause slideshow">Ⅱ</button></div></div></section><div class="ribbon"><span>Architecture</span><span aria-hidden="true">✦</span><span>Interiors</span><span aria-hidden="true">✦</span><span>Thoughtful details</span><span aria-hidden="true">✦</span><span>Timeless living</span></div><section class="container section split"><div class="reveal"><p class="eyebrow">${esc(site.home?.introEyebrow || "Our approach")}</p><h2>${esc(site.home?.introTitle || site.tagline)}</h2><p class="muted intro">${esc(site.home?.introText || site.description)}</p><p class="muted">${esc(site.home?.introSecondary || "")}</p>${link("about.html", "Discover our philosophy", "text-link")}</div><div><div class="editorial-image">${image(site.home?.image || "assets/images/bedroom.svg", site.home?.imageAlt || "Interior concept")}</div><p class="image-note">Material & mood study · illustrative concept</p></div></section><section class="surface section"><div class="container"><div class="section-top"><div><p class="eyebrow">What we do</p><h2>One vision.<br>Every considered detail.</h2></div>${link("services.html", "Explore our expertise", "text-link")}</div><div class="grid">${services
     .slice(0, 3)
     .map(
       (s, i) =>
@@ -132,23 +114,12 @@ function home() {
     )
     .join(
       "",
-    )}</div></div></section><section class="container section"><div class="section-top"><div><p class="eyebrow">Selected design studies</p><h2>A little inspiration.<br>A world of possibilities.</h2></div><div class="slider-controls"><button class="icon-button" id="projects-prev" aria-label="Scroll projects backward">←</button><button class="icon-button" id="projects-next" aria-label="Scroll projects forward">→</button></div></div><div class="carousel-track" id="featured-projects">${projects.slice(0, 5).map(card).join("")}</div><p class="image-note">Original sample concepts. Real project photography and credits will be added after studio approval.</p></section><section class="surface section"><div class="container"><p class="eyebrow">The difference is in the details</p><h2>Good design goes<br>beyond the beautiful.</h2><div class="principles">${[
-    [
-      "Made around you",
-      "Your routines and aspirations lead every design decision.",
-    ],
-    [
-      "Clarity at every step",
-      "A shared brief, considered choices and a defined scope.",
-    ],
-    [
-      "Materials with meaning",
-      "Texture, proportion and natural light, working together.",
-    ],
-  ]
+    )}</div></div></section><section class="container section"><div class="section-top"><div><p class="eyebrow">Selected design studies</p><h2>A little inspiration.<br>A world of possibilities.</h2></div><div class="slider-controls"><button class="icon-button" id="projects-prev" aria-label="Scroll projects backward">←</button><button class="icon-button" id="projects-next" aria-label="Scroll projects forward">→</button></div></div><div class="carousel-track" id="featured-projects">${projects.slice(0, 5).map(card).join("")}</div><p class="image-note">Original sample concepts. Real project photography and credits will be added after studio approval.</p></section><section class="surface section"><div class="container"><p class="eyebrow">The difference is in the details</p><h2>Good design goes<br>beyond the beautiful.</h2><div class="principles">${(
+    site.principles || []
+  )
     .map(
-      ([t, d], i) =>
-        `<div class="reveal"><span class="number">0${i + 1}</span><h3>${t}</h3><p>${d}</p></div>`,
+      (item, i) =>
+        `<div class="reveal"><span class="number">0${i + 1}</span><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>`,
     )
     .join(
       "",
@@ -278,7 +249,7 @@ function about() {
       "Spaces with purpose.\nDesign with soul.",
       "A portfolio concept built on a simple belief: good design makes everyday living better.",
     ) +
-    `<section class="container section split"><div class="editorial-image">${image("assets/images/living.svg", "Illustrative living room concept")}</div><div><p class="eyebrow">Our philosophy</p><h2>Quietly distinctive.<br>Deeply personal.</h2><p class="muted">We explore the meeting point of architecture, materials and the people who inhabit a space. Practical planning and a coherent visual language belong together.</p>${note}</div></section><section class="surface section"><div class="container grid"><div><p class="eyebrow">Our mission</p><h3>Make everyday spaces matter.</h3><p>Bring care, clarity and a considered design approach to each brief.</p></div><div><p class="eyebrow">Our vision</p><h3>Beautiful living, naturally.</h3><p>Spaces that remain meaningful beyond a passing trend.</p></div><div><p class="eyebrow">People & milestones</p><h3>A studio taking shape.</h3><p>${site.team.length ? site.team.map((t) => esc(t.name) + " — " + esc(t.role)).join("<br>") : "Founder, team credentials and verified achievements await studio confirmation."}</p>${site.achievements.map((a) => `<p>${esc(a)}</p>`).join("")}</div></div></section><section class="container section"><p class="eyebrow">Our approach</p><h2>Considered at every stage.</h2>${process()}<h3 style="margin-top:4rem">Where we work</h3><p>${site.locations.length ? site.locations.map(esc).join(" · ") : "Service locations will be published after studio confirmation."}</p></section>${cta()}`;
+    `<section class="container section split"><div class="editorial-image">${image(site.about?.image || "assets/images/living.svg", site.about?.imageAlt || "Interior concept")}</div><div><p class="eyebrow">Our philosophy</p><h2>${esc(site.about?.title || site.tagline)}</h2><p class="muted">${esc(site.about?.description || site.description)}</p>${note}</div></section><section class="surface section"><div class="container grid"><div><p class="eyebrow">Our mission</p><h3>${esc(site.about?.missionTitle || "Our mission")}</h3><p>${esc(site.about?.missionText || "")}</p></div><div><p class="eyebrow">Our vision</p><h3>${esc(site.about?.visionTitle || "Our vision")}</h3><p>${esc(site.about?.visionText || "")}</p></div><div><p class="eyebrow">People & milestones</p><h3>A studio taking shape.</h3><p>${site.team.length ? site.team.map((t) => esc(t.name) + " — " + esc(t.role)).join("<br>") : "Founder, team credentials and verified achievements await studio confirmation."}</p>${site.achievements.map((a) => `<p>${esc(a)}</p>`).join("")}</div></div></section><section class="container section"><p class="eyebrow">Our approach</p><h2>Considered at every stage.</h2>${process()}<h3 style="margin-top:4rem">Where we work</h3><p>${site.locations.length ? site.locations.map(esc).join(" · ") : "Service locations will be published after studio confirmation."}</p></section>${cta()}`;
 }
 function servicePage() {
   main.innerHTML =
@@ -542,15 +513,48 @@ function contact() {
         "",
       )}</div></div><div class="form-aside"><p class="eyebrow">Find us</p><h2>Your next chapter<br>starts here.</h2>${site.address ? link("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(site.address), "View map", "text-link") : "<p>A map link will be available when the studio address has been verified.</p>"}<p class="notice">This is a studio concept. Contact details must be supplied before public launch.</p></div></section>${cta()}`;
 }
-async function load(file) {
-  const response = await fetch("data/" + file + ".json");
-  if (!response.ok) throw new Error("Content unavailable: " + file);
-  return response.json();
-}
 try {
-  [site, services, projects, testimonials] = await Promise.all(
-    ["site", "services", "projects", "testimonials"].map(load),
-  );
+  const bundle = await loadPublicContent();
+  [site, services, projects, testimonials] = bundle.values;
+  if (!site.placeholder) note = "";
+  const canonical = new URL(location.href);
+  canonical.searchParams.delete("editorPreview");
+  canonical.searchParams.delete("studio");
+  $('link[rel="canonical"]').href = canonical.href;
+  $('meta[property="og:url"]').content = canonical.href;
+  if (page !== "project")
+    $('meta[property="og:image"]').content = new URL(
+      site.hero[0].image,
+      new URL("../", import.meta.url),
+    ).href;
+  // Local previews keep their selected studio through relative page navigation.
+  if (
+    (["localhost", "127.0.0.1", "[::1]"].includes(location.hostname) &&
+      new URLSearchParams(location.search).has("studio")) ||
+    (parent !== window &&
+      new URLSearchParams(location.search).get("editorPreview") === "1")
+  ) {
+    document.addEventListener(
+      "click",
+      (event) => {
+        const anchor = event.target.closest("a[href]");
+        if (!anchor) return;
+        const url = new URL(anchor.href);
+        if (url.origin === location.origin && url.pathname.endsWith(".html")) {
+          url.searchParams.set("studio", bundle.studio.id);
+          if (
+            parent !== window &&
+            new URLSearchParams(location.search).get("editorPreview") === "1"
+          )
+            url.searchParams.set("editorPreview", "1");
+          anchor.href = url.href;
+        }
+      },
+      { capture: true },
+    );
+  }
+  document.title = document.title.replace(/\|.*$/, "| " + site.name);
+  const copy = site.pages?.[page];
   if (
     !site.name ||
     !Array.isArray(site.hero) ||
@@ -573,6 +577,18 @@ try {
       contact,
     })[page] || home
   )();
+  if (copy) {
+    if (copy.title && page !== "project" && page !== "index")
+      $("#main h1").textContent = copy.title;
+    if (copy.description && $("#main .page-heading .intro"))
+      $("#main .page-heading .intro").textContent = copy.description;
+  }
+  $('meta[property="og:title"]').content = document.title;
+  if (copy?.description)
+    $('meta[name="description"]').content = copy.description;
+  $('meta[property="og:description"]').content = $(
+    'meta[name="description"]',
+  ).content;
   initializeMotion();
   document.addEventListener(
     "error",

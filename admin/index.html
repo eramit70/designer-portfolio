@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Studio content workspace</title>
+    <link rel="icon" href="../assets/icons/mark.svg" />
+    <link rel="stylesheet" href="admin.css" />
+    <script type="module" src="editor.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#workspace">Skip to editor</a>
+    <aside class="sidebar">
+      <a class="wordmark" href="../index.html"
+        >f. <span>Studio workspace<small>LOCAL CONTENT EDITOR</small></span></a
+      ><label for="studio-select">Active studio</label
+      ><select id="studio-select" aria-label="Active studio"></select
+      ><button id="add-studio" class="secondary">+ Add a studio</button>
+      <nav aria-label="Editor sections" id="tabs"></nav>
+      <div class="sidebar-note">
+        No login. No server writes.<br />Your edits stay in this browser until
+        you export them.
+      </div>
+      <a href="../docs/admin-guide.md">Content & publishing guide ↗</a>
+    </aside>
+    <div class="shell">
+      <header>
+        <div>
+          <span class="eyebrow">A considered content workspace</span>
+          <h1 id="workspace-title">Your studio, your stories.</h1>
+        </div>
+        <div class="toolbar">
+          <button id="save-draft" class="secondary">Save browser draft</button
+          ><button id="export-zip">Export website update</button>
+        </div>
+      </header>
+      <div class="statusbar">
+        <span id="dirty-status">No unpublished edits</span
+        ><span>Static GitHub Pages · Public content only</span>
+      </div>
+      <div id="notice" role="status" aria-live="polite"></div>
+      <main id="workspace" tabindex="-1"><p>Loading studio content…</p></main>
+    </div>
+    <input
+      type="file"
+      id="import-file"
+      accept="application/json,.json"
+      hidden
+    /><input
+      type="file"
+      id="image-file"
+      accept="image/png,image/jpeg,image/webp"
+      hidden
+    />
+    <dialog id="new-studio">
+      <form id="new-studio-form">
+        <h2>A new studio.</h2>
+        <p>
+          Start with a clearly labelled copy of the concept content, then make
+          it your own.
+        </p>
+        <label for="new-id">Studio ID (permanent URL-safe slug)</label
+        ><input
+          id="new-id"
+          required
+          pattern="[a-z0-9]+(-[a-z0-9]+)*"
+          maxlength="50"
+          placeholder="oak-studio"
+        /><label for="new-label">Studio label</label
+        ><input id="new-label" required maxlength="100" /><label for="new-url"
+          >Published website URL (ending in /)</label
+        ><input
+          id="new-url"
+          type="url"
+          required
+          placeholder="https://studio.example/"
+        />
+        <div class="toolbar">
+          <button type="button" id="cancel-new" class="secondary">Cancel</button
+          ><button>Create studio</button>
+        </div>
+        <p id="new-error" role="alert"></p>
+      </form>
+    </dialog>
+    <noscript
+      >This local editor requires JavaScript and a static HTTP server.</noscript
+    >
+  </body>
+</html>
