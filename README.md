@@ -46,3 +46,9 @@ Business phone, WhatsApp number, address, hours, team, service locations, achiev
 ## Animation and motion controls
 
 The site includes cinematic hero text/image motion, scroll-driven entrances, image reveals, an animated service ribbon, gallery transitions and responsive navigation animations. Use the persistent **Motion on / Motion off** button to pause decorative effects. Reduced-motion device settings are respected automatically. No animation library or runtime package is required. See [motion guide](docs/motion-guide.md); run `python3 tests/motion_smoke.py` for animation-specific checks.
+
+## Multi-studio content editor
+
+Open `admin/` through your local static server (Windows: `http://localhost:8000/admin/`). Manage studio branding/content, services, project images, comparison pairs and testimonials with structured fields. Add studios and configure published URLs and separate JSON paths in `data/config.json`. Preview drafts, save them in this browser, and export a workspace JSON backup or website-update ZIP. Extract the ZIP into the checkout, review and commit the changes, then publish through GitHub Pages. There is no password login and no direct GitHub write access. Owner email is public contact metadata; never put credentials in JSON. See [admin guide](docs/admin-guide.md).
+
+Additional checks: `node tests/content-store.test.mjs` and, with the static server running, `python3 tests/editor_smoke.py`. Each custom-domain deployment must actually serve the app at the configured base URL; URL configuration does not provision hosting or DNS.

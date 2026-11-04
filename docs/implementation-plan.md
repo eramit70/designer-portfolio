@@ -26,3 +26,7 @@ D'LIFE returned HTTP 403 from this environment, so its live layout and behavior 
 ## Remaining production work
 
 Replace the placeholder identity and image content with authorized studio material. Confirm service availability, business contacts, location/timezone and all factual claims. Add permission-backed real testimonials and matched comparison pairs. Add production canonical/social metadata and conduct a real-device screen-reader review. Deployment and external WhatsApp sending require owner-side configuration and a real device; no public launch has been performed.
+
+## Scope update: multi-studio local editor
+
+The user selected a GitHub Pages-compatible local JSON editor with import/export and multiple studio/domain mappings. This supersedes the initial exclusion of an admin-style interface while retaining the no-backend/no-database/no-authentication constraints. `admin/` supplies a browser-only content workspace; `js/content-store.js` provides shared routing and content validation. `data/config.json` maps URLs to independent content files. Owner email is public metadata; password login is excluded by the selected workflow. No live file writes, account security, DNS provisioning or automatic publishing are claimed.

@@ -40,3 +40,7 @@ Run `python3 tests/check_content.py` and `node --check js/app.js` from the check
 ## Animation update — 4 November 2026
 
 White Soul Studio was inspected in Chromium as the new motion reference. Original word-mask headings, image reveals, hero image zoom/parallax, ticker, staggered cards, mobile navigation, image-dialog transitions and a persistent motion switch were added. Animation-state tests verify the running ticker, title slide changes, visible image masks, reading progress, filtered-card reveals, saved motion preference and live reduced motion. Desktop and mobile screenshots were inspected. No third-party animation code or images were copied.
+
+## Multi-studio editor update — 4 November 2026
+
+The browser-only editor supports structured content edits, array add/reorder/remove, optional comparison management, per-studio URL/file settings, image selection, draft previews, browser draft storage, JSON import/export and website-update ZIP export. Routing/content tests cover exact origins, complete path prefixes, nested route priority, unknown URL rejection, duplicate paths and malformed content. Browser editor tests verify isolated studio edits, draft previews and navigation, owner metadata, archive integrity, image byte preservation, atomic invalid-import rejection, valid JSON round-trips and mobile overflow. No authentication or remote write service is implemented. Deployment/DNS for additional domains and real-device testing remain outside the verified local workflow.
