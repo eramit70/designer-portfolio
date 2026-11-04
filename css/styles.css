@@ -1463,3 +1463,41 @@ a:hover > .arrow-icon {
     justify-content: flex-end;
   }
 }
+.brand-logo {
+  width: auto;
+  max-width: 150px;
+  height: 50px;
+  object-fit: contain;
+}
+/* Studio names and logos may vary between independently configured brands. */
+.header-inner {
+  height: auto;
+  min-height: 94px;
+  padding-block: 18px;
+}
+.header-inner > .brand {
+  min-width: 0;
+  max-width: 38%;
+}
+.brand-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.brand-mark {
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .header-inner {
+    min-height: 78px;
+    padding-block: 12px;
+  }
+  .header-inner > .brand {
+    max-width: calc(100% - 95px);
+  }
+  .brand-name {
+    font-size: 1rem;
+  }
+  .nav {
+    top: 100%;
+  }
+}

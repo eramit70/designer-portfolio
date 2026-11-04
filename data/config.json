@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "defaultStudio": "forme",
+  "studios": [
+    {
+      "id": "forme",
+      "label": "FORME studio",
+      "urls": ["https://eramit70.github.io/designer-portfolio/"],
+      "admin": {
+        "contactEmail": ""
+      },
+      "content": {
+        "site": "data/site.json",
+        "services": "data/services.json",
+        "projects": "data/projects.json",
+        "testimonials": "data/testimonials.json"
+      }
+    }
+  ]
+}
