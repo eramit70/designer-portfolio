@@ -1,3 +1,4 @@
+import { initializeMotion, animateHeading } from "./motion.js";
 const $ = (s, root = document) => root.querySelector(s);
 const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 const esc = (value) =>
@@ -162,12 +163,16 @@ function home() {
       el.setAttribute("aria-hidden", String(i !== active));
     });
     $("#hero-title").textContent = site.hero[active].title;
+    animateHeading($("#hero-title"));
     $("#hero-label").textContent = site.hero[active].label;
     $("#slide-count").textContent = `0${active + 1} / 0${site.hero.length}`;
   }
   function schedule() {
     clearInterval(timer);
-    if (!paused)
+    if (
+      !paused &&
+      !document.documentElement.classList.contains("motion-paused")
+    )
       timer = setInterval(() => {
         if (
           !document.hidden &&
@@ -176,7 +181,9 @@ function home() {
         )
           show(active + 1);
       }, 6500);
-    $("#hero-pause").textContent = paused ? "▶" : "Ⅱ";
+    $("#hero-pause").innerHTML = paused
+      ? '<svg class="control-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z" fill="currentColor"/></svg>'
+      : '<svg class="control-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="3"/></svg>';
     $("#hero-pause").setAttribute(
       "aria-label",
       paused ? "Play slideshow" : "Pause slideshow",
@@ -191,6 +198,12 @@ function home() {
   reduced.addEventListener("change", () => {
     paused = reduced.matches;
     schedule();
+  });
+  document.addEventListener("site:motion", (event) => {
+    if (event.detail.paused) {
+      paused = true;
+      schedule();
+    }
   });
   show(0);
   schedule();
@@ -420,6 +433,20 @@ function project() {
     i = (n + p.images.length) % p.images.length;
     $("#lightbox-image").src = asset(p.images[i].src);
     $("#lightbox-image").alt = p.images[i].alt;
+    if (
+      !reduced.matches &&
+      !document.documentElement.classList.contains("motion-paused")
+    ) {
+      const photo = $("#lightbox-image");
+      photo.getAnimations().forEach((animation) => animation.cancel());
+      photo.animate(
+        [
+          { opacity: 0.25, transform: "scale(.985)" },
+          { opacity: 1, transform: "scale(1)" },
+        ],
+        { duration: 420, easing: "ease-out" },
+      );
+    }
     $("#image-caption").textContent =
       `${i + 1} / ${p.images.length} · ${p.images[i].alt}`;
   }
@@ -515,23 +542,6 @@ function contact() {
         "",
       )}</div></div><div class="form-aside"><p class="eyebrow">Find us</p><h2>Your next chapter<br>starts here.</h2>${site.address ? link("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(site.address), "View map", "text-link") : "<p>A map link will be available when the studio address has been verified.</p>"}<p class="notice">This is a studio concept. Contact details must be supplied before public launch.</p></div></section>${cta()}`;
 }
-function reveal() {
-  if (reduced.matches) return;
-  const o = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.remove("pending");
-          o.unobserve(e.target);
-        }
-      }),
-    { threshold: 0.08 },
-  );
-  $$(".reveal").forEach((el) => {
-    el.classList.add("pending");
-    o.observe(el);
-  });
-}
 async function load(file) {
   const response = await fetch("data/" + file + ".json");
   if (!response.ok) throw new Error("Content unavailable: " + file);
@@ -563,7 +573,7 @@ try {
       contact,
     })[page] || home
   )();
-  reveal();
+  initializeMotion();
   document.addEventListener(
     "error",
     (e) => {

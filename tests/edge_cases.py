@@ -33,7 +33,18 @@ with sync_playwright() as p:
  page.route('**/designer-portfolio/**',subpath)
  page.goto(base+'designer-portfolio/portfolio.html');page.wait_for_selector('#project-grid .card');page.locator('#project-grid .card').first.click();page.wait_for_selector('.gallery-image');assert '/designer-portfolio/project.html' in page.url
  print('PASS repository-subpath assets, JSON and project links')
- page.unroute_all(behavior='wait');page.route('**/data/projects.json',lambda route:route.fulfill(status=500,body='Unavailable'));page.goto(base+'portfolio.html');page.wait_for_selector('h1');assert 'taking a moment' in page.locator('h1').inner_text()
+ # Isolate failure handling from the preceding upstream-forwarding subpath fixture.
+ failure=browser.new_page()
+ failure.on('pageerror',lambda e:errors.append(str(e)))
+ failed_requests=[]
+ def unavailable(route):
+  failed_requests.append(route.request.url)
+  route.fulfill(status=500,body='Unavailable')
+ failure.route('**/data/projects.json',unavailable)
+ failure.goto(base+'portfolio.html')
+ failure.get_by_role('heading',name='This space is taking a moment.').wait_for()
+ assert failed_requests and 'taking a moment' in failure.locator('h1').inner_text()
+ failure.close()
  print('PASS failed JSON friendly recovery state')
  assert not errors, errors
  browser.close()
