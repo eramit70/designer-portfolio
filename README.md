@@ -42,3 +42,7 @@ Browser tests default to `/usr/bin/chromium`; override `CHROMIUM_PATH` or `TEST_
 ## Current content limitations
 
 Business phone, WhatsApp number, address, hours, team, service locations, achievements and verified statistics remain unconfigured. No real testimonials or before/after pairs were provided. The hero is an AI-generated concept render, other images are original SVG illustrations; none is presented as real project photography. WhatsApp sending remains unavailable until a valid business number is configured. An enquiry is never an automatic appointment confirmation.
+
+## Animation and motion controls
+
+The site includes cinematic hero text/image motion, scroll-driven entrances, image reveals, an animated service ribbon, gallery transitions and responsive navigation animations. Use the persistent **Motion on / Motion off** button to pause decorative effects. Reduced-motion device settings are respected automatically. No animation library or runtime package is required. See [motion guide](docs/motion-guide.md); run `python3 tests/motion_smoke.py` for animation-specific checks.

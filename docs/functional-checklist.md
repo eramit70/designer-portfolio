@@ -36,3 +36,7 @@ No actual before/after pairs, testimonials, achievements, team credentials or st
 ## Commands
 
 Run `python3 tests/check_content.py` and `node --check js/app.js` from the checkout. With a local static HTTP server running, run `python3 tests/browser_smoke.py` and `python3 tests/edge_cases.py`. The latter uses intercepted synthetic fixtures and verifies repository-subpath requests without exposing other workspace directories.
+
+## Animation update — 4 November 2026
+
+White Soul Studio was inspected in Chromium as the new motion reference. Original word-mask headings, image reveals, hero image zoom/parallax, ticker, staggered cards, mobile navigation, image-dialog transitions and a persistent motion switch were added. Animation-state tests verify the running ticker, title slide changes, visible image masks, reading progress, filtered-card reveals, saved motion preference and live reduced motion. Desktop and mobile screenshots were inspected. No third-party animation code or images were copied.
